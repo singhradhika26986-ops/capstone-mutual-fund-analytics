@@ -4,7 +4,12 @@ import os
 
 # Database Connection
 conn = sqlite3.connect("mutual_fund.db")
+cursor = conn.cursor()
 
+with open("schema.sql", "r") as f:
+    cursor.executescript(f.read())
+
+conn.commit()
 # CSV Files
 files = {
     "01_fund_master": "data/raw/01_fund_master.csv",
